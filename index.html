@@ -84,6 +84,7 @@
                 placeholder="Clothes Expense"
               />
             </div>
+            <!-- Expense Error Messages  -->
             <div>
               <p id="expense-empty-error-message" class="error-messages">
                 Empty! Please Enter a Value
@@ -95,9 +96,11 @@
                 Your Expenses Are More Than Your Income !!!
               </p>
             </div>
+            <!-- Calculate Button  -->
             <div class="d-flex justify-content-center">
               <button id="calc-button" class="calc-buttons">Calculate</button>
             </div>
+
             <div>
               <h5 class="expense-texts">
                 Total Expenses: <span id="total-expense"> 0</span>
@@ -112,7 +115,6 @@
             class="d-flex flex-xl-row flex-lg-column flex-column justify-content-around align-items-center mx-auto"
           >
             <label class="calc-label" for="">Save</label>
-            <!-- <div class="justify-content-between"> -->
             <input
               id="save-percent-amount"
               class="calc-input"
@@ -121,11 +123,11 @@
               disabled
             />
             <label class="calc-label" for="">%</label>
-            <!-- </div> -->
+            <!-- Save Button  -->
             <button id="save-button" class="calc-buttons" disabled>Save</button>
           </div>
-
           <div class="text-center">
+            <!-- Saving Error Messages   -->
             <div>
               <p id="saving-empty-error-message" class="error-messages">
                 Empty! Please Enter a Value

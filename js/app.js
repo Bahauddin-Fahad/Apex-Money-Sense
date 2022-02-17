@@ -1,5 +1,4 @@
-// Expense Error Handling //
-// empty Error Handling //
+// Empty Error Handling //
 function emptyErrorHandler(section, isEmpty) {
   const emptyErrorMessage = document.getElementById(
     section + "-empty-error-message"
@@ -17,7 +16,7 @@ function emptyErrorHandler(section, isEmpty) {
     }
   }
 }
-// Income And Expense Negative Error Handling //
+// Income, Expense and Savings Negative Error Handling //
 function negativeErrorHandler(section, isinputNegative) {
   const negativeErrorMessage = document.getElementById(
     section + "-negative-error-message"
@@ -116,7 +115,7 @@ document.getElementById("save-button").addEventListener("click", function () {
   emptyErrorHandler("saving", false);
   negativeErrorHandler("saving", false);
   amountComparison("saving", false);
-  // save Input
+  // Save Input //
   const saveAmountValue = getInputValue("save-percent-amount");
   if (!saveAmountValue) {
     emptyErrorHandler("saving", true);
