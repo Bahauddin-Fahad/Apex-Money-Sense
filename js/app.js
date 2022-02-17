@@ -1,97 +1,150 @@
-// Getting Input Values
-function getInputValue(inputId) {
-  const inputTypeField = document.getElementById(inputId);
-  const inputTypeText = inputTypeField.value;
-  const inputTypeValue = parseFloat(inputTypeText);
-  const negativeErrorMessage = document.getElementById(
-    "negative-error-message"
+// Expense Error Handling //
+// empty Error Handling //
+function emptyErrorHandler(section, isEmpty) {
+  const emptyErrorMessage = document.getElementById(
+    section + "-empty-error-message"
   );
-  const expenseTexts = document.getElementsByClassName("expense-texts");
-  for (const expenseText of expenseTexts) {
-    if (inputTypeValue < 0) {
-      expenseText.style.display = "none";
+  const texts = document.getElementsByClassName(section + "-texts");
+  for (const text of texts) {
+    if (isEmpty === true) {
+      text.style.display = "none";
+      emptyErrorMessage.style.display = "block";
+    } else if (isEmpty === false) {
+      text.style.display = "block";
+      emptyErrorMessage.style.display = "none";
+    }
+  }
+}
+// Income And Expense Negative Error Handling //
+function negativeErrorHandler(section, isinputNegative) {
+  const negativeErrorMessage = document.getElementById(
+    section + "-negative-error-message"
+  );
+  const texts = document.getElementsByClassName(section + "-texts");
+  for (const text of texts) {
+    if (isinputNegative === true) {
+      text.style.display = "none";
       negativeErrorMessage.style.display = "block";
-    } else {
-      expenseText.style.display = "block";
+    } else if (isinputNegative === false) {
+      text.style.display = "block";
       negativeErrorMessage.style.display = "none";
     }
   }
-  return inputTypeValue;
 }
-//   Expense Section //
-function getSumOfExpenses() {
-  const foodExpenseValue = getInputValue("food-expense");
-  const rentExpenseValue = getInputValue("rent-expense");
-  const clothesExpenseValue = getInputValue("clothes-expense");
-  // Sum Of Expense //
-  const sumOfExpenses =
-    foodExpenseValue + rentExpenseValue + clothesExpenseValue;
-  const totalExpensesField = document.getElementById("total-expense");
-  totalExpensesField.innerText = sumOfExpenses;
-  return sumOfExpenses;
-}
-// Calculating Balance
-function calculatingBalance() {
-  const incomeInputValue = getInputValue("income-id");
-  const sumOfExpenses = getSumOfExpenses();
-  const balanceField = document.getElementById("balance");
-  //   const balance = balanceField.innerText;
-  const balance = incomeInputValue - sumOfExpenses;
-  balanceField.innerText = balance;
-  const expenseLimitMessage = document.getElementById(
-    "expense-limit-error-message"
+// Income And Expense Comparison //
+function amountComparison(section, isBigger) {
+  const amountLimitErrorMessage = document.getElementById(
+    section + "-limit-error-message"
   );
-  const expenseTexts = document.getElementsByClassName("expense-texts");
-  for (const expenseText of expenseTexts) {
-    if (balance < 0) {
-      expenseText.style.display = "none";
-      expenseLimitMessage.style.display = "block";
-    } else {
-      expenseText.style.display = "block";
-      expenseLimitMessage.style.display = "none";
+  const texts = document.getElementsByClassName(section + "-texts");
+  for (const text of texts) {
+    if (isBigger === true) {
+      text.style.display = "none";
+      amountLimitErrorMessage.style.display = "block";
+    } else if (isBigger === false) {
+      text.style.display = "block";
+      amountLimitErrorMessage.style.display = "none";
     }
   }
-  return balance;
 }
-
+// function amountComparison(isBigger) {
+//   const ExpenseLimitErrorMessage = document.getElementById(
+//     "expense-limit-error-message"
+//   );
+//   const expenseTexts = document.getElementsByClassName("expense-texts");
+//   for (const expenseText of expenseTexts) {
+//     if (isBigger === true) {
+//       expenseText.style.display = "none";
+//       ExpenseLimitErrorMessage.style.display = "block";
+//     } else if (isBigger === false) {
+//       expenseText.style.display = "block";
+//       ExpenseLimitErrorMessage.style.display = "none";
+//     }
+//   }
+// }
+// Getting Input Value //
+function getInputValue(inputId) {
+  const inputField = document.getElementById(inputId);
+  const inputText = inputField.value;
+  const inputValue = parseFloat(inputText);
+  return inputValue;
+}
+// Income And Expense Calculation Section //
 document.getElementById("calc-button").addEventListener("click", function () {
-  calculatingBalance();
+  // Variable Declaration //
+  const incomeValue = getInputValue("income-id");
+  const foodExpense = getInputValue("food-expense");
+  const rentExpense = getInputValue("rent-expense");
+  const clothesExpense = getInputValue("clothes-expense");
+
+  // Empty Error Handling //
+  if (!incomeValue || !foodExpense || !rentExpense || !clothesExpense) {
+    emptyErrorHandler("expense", true);
+    return null;
+  } else {
+    emptyErrorHandler("expense", false);
+  }
+
+  // Negative Error Handling
+  if (
+    incomeValue < 0 ||
+    foodExpense < 0 ||
+    rentExpense < 0 ||
+    clothesExpense < 0
+  ) {
+    negativeErrorHandler("expense", true);
+    return null;
+  } else {
+    negativeErrorHandler("expense", false);
+  }
+  // Sum Of Expenses //
+  const totalExpenses = foodExpense + rentExpense + clothesExpense;
+  const totalExpensesField = document.getElementById("total-expense");
+  totalExpensesField.innerText = totalExpenses;
+  if (totalExpenses > incomeValue) {
+    amountComparison("expense", true);
+  } else {
+    amountComparison("expense", false);
+  }
+  // Balance Count //
+  const balance = incomeValue - totalExpenses;
+  const balanceField = document.getElementById("balance");
+  balanceField.innerText = balance;
 });
 
-// Savings section //
+// Saving Calculation Section //
 document.getElementById("save-button").addEventListener("click", function () {
-  const incomeInput = getInputValue("income-id");
-  const saveInputValue = getInputValue("save-percent-amount");
-  if (saveInputValue < 0) {
-    const negativeErrorMessage = document.getElementById(
-      "saving-negative-error-message"
-    );
-    negativeErrorMessage.style.display = "block";
-    for (const savingText of savingTexts) {
-      savingText.style.display = "none";
-    }
+  // save Input
+  const saveAmountValue = getInputValue("save-percent-amount");
+  if (!saveAmountValue) {
+    emptyErrorHandler("saving", true);
+    return null;
   } else {
-    const savingAmountField = document.getElementById("saving-amount");
-    const savingAmount = incomeInput * (saveInputValue / 100);
-    savingAmountField.innerText = savingAmount;
-    const balance = calculatingBalance();
-    const remainingBalanceField = document.getElementById("remaining-balance");
-    const remainingBalance = balance - savingAmount;
-
-    //   error check
-    const balanceLimitMessage = document.getElementById(
-      "balance-limit-error-message"
-    );
-    const savingTexts = document.getElementsByClassName("saving-texts");
-    for (const savingText of savingTexts) {
-      if (remainingBalance >= 0) {
-        savingText.style.display = "block";
-        balanceLimitMessage.style.display = "none";
-        remainingBalanceField.innerText = remainingBalance;
-      } else {
-        savingText.style.display = "none";
-        balanceLimitMessage.style.display = "block";
-      }
-    }
+    emptyErrorHandler("saving", false);
   }
+  if (saveAmountValue < 0) {
+    negativeErrorHandler("saving", true);
+    return null;
+  } else {
+    negativeErrorHandler("saving", false);
+  }
+  // Income Input //
+  const incomeValue = getInputValue("income-id");
+  // Saving Amount //
+  const savingAmountField = document.getElementById("saving-amount");
+  const savingAmount = incomeValue * (saveAmountValue / 100);
+  savingAmountField.innerText = savingAmount;
+  // Balance
+  const balanceField = document.getElementById("balance");
+  const balanceFieldText = balanceField.innerText;
+  const balance = parseFloat(balanceFieldText);
+  // Remaining Balance
+  const remainingBalanceField = document.getElementById("remaining-balance");
+  const remainingBalance = balance - savingAmount;
+  if (remainingBalance < 0) {
+    amountComparison("saving", true);
+  } else {
+    amountComparison("saving", false);
+  }
+  remainingBalanceField.innerText = remainingBalance;
 });
