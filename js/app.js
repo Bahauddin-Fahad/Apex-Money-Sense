@@ -47,21 +47,6 @@ function amountComparison(section, isBigger) {
     }
   }
 }
-// function amountComparison(isBigger) {
-//   const ExpenseLimitErrorMessage = document.getElementById(
-//     "expense-limit-error-message"
-//   );
-//   const expenseTexts = document.getElementsByClassName("expense-texts");
-//   for (const expenseText of expenseTexts) {
-//     if (isBigger === true) {
-//       expenseText.style.display = "none";
-//       ExpenseLimitErrorMessage.style.display = "block";
-//     } else if (isBigger === false) {
-//       expenseText.style.display = "block";
-//       ExpenseLimitErrorMessage.style.display = "none";
-//     }
-//   }
-// }
 // Getting Input Value //
 function getInputValue(inputId) {
   const inputField = document.getElementById(inputId);
@@ -71,8 +56,12 @@ function getInputValue(inputId) {
 }
 // Income And Expense Calculation Section //
 document.getElementById("calc-button").addEventListener("click", function () {
+  emptyErrorHandler("expense", false);
+  negativeErrorHandler("expense", false);
+  amountComparison("expense", false);
+
   // Variable Declaration //
-  const incomeValue = getInputValue("income-id");
+  const incomeValue = getInputValue("total-income");
   const foodExpense = getInputValue("food-expense");
   const rentExpense = getInputValue("rent-expense");
   const clothesExpense = getInputValue("clothes-expense");
@@ -81,10 +70,7 @@ document.getElementById("calc-button").addEventListener("click", function () {
   if (!incomeValue || !foodExpense || !rentExpense || !clothesExpense) {
     emptyErrorHandler("expense", true);
     return null;
-  } else {
-    emptyErrorHandler("expense", false);
   }
-
   // Negative Error Handling
   if (
     incomeValue < 0 ||
@@ -94,8 +80,6 @@ document.getElementById("calc-button").addEventListener("click", function () {
   ) {
     negativeErrorHandler("expense", true);
     return null;
-  } else {
-    negativeErrorHandler("expense", false);
   }
   // Sum Of Expenses //
   const totalExpenses = foodExpense + rentExpense + clothesExpense;
@@ -103,33 +87,37 @@ document.getElementById("calc-button").addEventListener("click", function () {
   totalExpensesField.innerText = totalExpenses;
   if (totalExpenses > incomeValue) {
     amountComparison("expense", true);
-  } else {
-    amountComparison("expense", false);
+    return null;
   }
   // Balance Count //
   const balance = incomeValue - totalExpenses;
   const balanceField = document.getElementById("balance");
   balanceField.innerText = balance;
+  const saveInputField = document.getElementById("save-percent-amount");
+  if (balance > 0) {
+    saveInputField.removeAttribute("disabled");
+  } else {
+    saveInputField.setAttribute("disabled", true);
+  }
 });
 
 // Saving Calculation Section //
 document.getElementById("save-button").addEventListener("click", function () {
+  emptyErrorHandler("saving", false);
+  negativeErrorHandler("saving", false);
+  amountComparison("saving", false);
   // save Input
   const saveAmountValue = getInputValue("save-percent-amount");
   if (!saveAmountValue) {
     emptyErrorHandler("saving", true);
     return null;
-  } else {
-    emptyErrorHandler("saving", false);
   }
   if (saveAmountValue < 0) {
     negativeErrorHandler("saving", true);
     return null;
-  } else {
-    negativeErrorHandler("saving", false);
   }
   // Income Input //
-  const incomeValue = getInputValue("income-id");
+  const incomeValue = getInputValue("total-income");
   // Saving Amount //
   const savingAmountField = document.getElementById("saving-amount");
   const savingAmount = incomeValue * (saveAmountValue / 100);
@@ -138,13 +126,13 @@ document.getElementById("save-button").addEventListener("click", function () {
   const balanceField = document.getElementById("balance");
   const balanceFieldText = balanceField.innerText;
   const balance = parseFloat(balanceFieldText);
+
   // Remaining Balance
   const remainingBalanceField = document.getElementById("remaining-balance");
   const remainingBalance = balance - savingAmount;
   if (remainingBalance < 0) {
     amountComparison("saving", true);
-  } else {
-    amountComparison("saving", false);
+    return null;
   }
   remainingBalanceField.innerText = remainingBalance;
 });
