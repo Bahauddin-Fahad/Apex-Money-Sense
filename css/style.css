@@ -3,7 +3,7 @@ body {
   padding: 40px;
 }
 ::placeholder {
-    text-align: center;
+  text-align: center;
   color: rgb(170, 170, 170);
   opacity: 1;
   font-weight: 100;
@@ -38,7 +38,7 @@ h5 {
   justify-content: space-between;
 }
 .calc-input {
-    text-align: center;
+  text-align: center;
   color: #1b2e35;
   font-weight: bold;
   border: 2px solid rgba(88, 88, 88, 0.411);
@@ -53,14 +53,14 @@ h5 {
 }
 
 .calc-buttons {
-  border: 2px solid #59E4A8;
+  border: 2px solid #59e4a8;
   border-radius: 5px;
-  color:  white;
+  color: white;
   margin: 10px 0;
-  background-color:#1B2E35;
+  background-color: #1b2e35f3;
   padding: 5px 20px;
 }
-.calc-buttons:hover {
+.calc-buttons:active {
   transform: scale(1.05);
 }
 .error-messages {

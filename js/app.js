@@ -9,6 +9,8 @@ function emptyErrorHandler(section, isEmpty) {
     if (isEmpty === true) {
       text.style.display = "none";
       emptyErrorMessage.style.display = "block";
+      document.getElementById("saving-amount").innerText = 0;
+      document.getElementById("remaining-balance").innerText = 0;
     } else if (isEmpty === false) {
       text.style.display = "block";
       emptyErrorMessage.style.display = "none";
@@ -25,9 +27,13 @@ function negativeErrorHandler(section, isinputNegative) {
     if (isinputNegative === true) {
       text.style.display = "none";
       negativeErrorMessage.style.display = "block";
+      document.getElementById("saving-amount").innerText = 0;
+      document.getElementById("remaining-balance").innerText = 0;
+      document.getElementById("save-button").setAttribute("disabled", true);
     } else if (isinputNegative === false) {
       text.style.display = "block";
       negativeErrorMessage.style.display = "none";
+      document.getElementById("save-button").removeAttribute("disabled");
     }
   }
 }
@@ -41,6 +47,10 @@ function amountComparison(section, isBigger) {
     if (isBigger === true) {
       text.style.display = "none";
       amountLimitErrorMessage.style.display = "block";
+      document.getElementById("saving-amount").innerText = 0;
+      document.getElementById("remaining-balance").innerText = 0;
+      document.getElementById("save-button").setAttribute("disabled", true);
+      document.getElementById("save-button").removeAttribute("disabled");
     } else if (isBigger === false) {
       text.style.display = "block";
       amountLimitErrorMessage.style.display = "none";
