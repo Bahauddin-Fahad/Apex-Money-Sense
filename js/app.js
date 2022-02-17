@@ -56,7 +56,7 @@ function amountComparison(section, isBigger) {
     }
   }
 }
-// Getting Input Value //
+// Getting Input Values //
 function getInputValue(inputId) {
   const inputField = document.getElementById(inputId);
   const inputText = inputField.value;
