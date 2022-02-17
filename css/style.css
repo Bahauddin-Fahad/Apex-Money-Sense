@@ -2,6 +2,12 @@ body {
   font-family: "Roboto", sans-serif;
   padding: 40px;
 }
+::placeholder {
+    text-align: center;
+  color: rgb(170, 170, 170);
+  opacity: 1;
+  font-weight: 100;
+}
 .heading-line {
   margin-bottom: 30px;
   color: #27725f;
@@ -12,6 +18,7 @@ h5 {
   margin: 15px 0;
   font-weight: 700;
 }
+/* Calculate Section  */
 .calculate-section {
   border: 2px solid gray;
   border-radius: 10px;
@@ -29,9 +36,9 @@ h5 {
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  /* column-gap: 50px; */
 }
 .calc-input {
+    text-align: center;
   color: #1b2e35;
   font-weight: bold;
   border: 2px solid rgba(88, 88, 88, 0.411);
@@ -39,26 +46,25 @@ h5 {
   border-radius: 3px;
 }
 .calc-input:focus {
-  /* color: white; */
   background-color: #d5f8e5;
   border: 2px solid #45a179df;
   border-radius: 3px;
   outline: 0;
 }
-.error-messages {
-  display: none;
-  font-weight: 600;
-  color: red;
-}
 
 .calc-buttons {
-  border: 2px solid #45a179df;
+  border: 2px solid #59E4A8;
   border-radius: 5px;
-  color: white;
+  color:  white;
   margin: 10px 0;
-  background-color: #59e4a8;
+  background-color:#1B2E35;
   padding: 5px 20px;
 }
 .calc-buttons:hover {
   transform: scale(1.05);
+}
+.error-messages {
+  display: none;
+  font-weight: 600;
+  color: red;
 }

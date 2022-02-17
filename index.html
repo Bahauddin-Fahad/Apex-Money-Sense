@@ -35,26 +35,54 @@
         </div>
         <!-- Calculation Section  -->
         <div class="col-lg-4 col-sm-12 calculate-section">
-          <div class="col-lg-9 mx-auto text-center">
+          <div class="col-lg-10 mx-auto text-center">
             <!-- Income Input  -->
             <h5 class="calc-heading">Income</h5>
-            <div class="calc-inputs">
+            <div
+              class="calc-inputs d-flex flex-lg-row flex-md-column flex-column"
+            >
               <label class="calc-label" for="">Income</label>
-              <input id="total-income" class="calc-input" type="number" />
+              <input
+                id="total-income"
+                class="calc-input"
+                type="number"
+                placeholder="Your Income"
+              />
             </div>
             <!-- Expenses Input  -->
             <h5 class="calc-heading">Expenses</h5>
-            <div class="calc-inputs">
+            <div
+              class="calc-inputs d-flex flex-lg-row flex-md-column flex-column"
+            >
               <label class="calc-label" for="">Food</label>
-              <input id="food-expense" class="calc-input" type="number" />
+              <input
+                id="food-expense"
+                class="calc-input"
+                type="number"
+                placeholder="Food Expense"
+              />
             </div>
-            <div class="calc-inputs">
+            <div
+              class="calc-inputs d-flex flex-lg-row flex-md-column flex-column"
+            >
               <label class="calc-label" for="">Rent</label>
-              <input id="rent-expense" class="calc-input" type="number" />
+              <input
+                id="rent-expense"
+                class="calc-input"
+                type="number"
+                placeholder="Rent Expense"
+              />
             </div>
-            <div class="calc-inputs">
+            <div
+              class="calc-inputs d-flex flex-lg-row flex-md-column flex-column"
+            >
               <label class="calc-label" for="">Clothes</label>
-              <input id="clothes-expense" class="calc-input" type="number" />
+              <input
+                id="clothes-expense"
+                class="calc-input"
+                type="number"
+                placeholder="Clothes Expense"
+              />
             </div>
             <div>
               <p id="expense-empty-error-message" class="error-messages">
@@ -81,18 +109,19 @@
           </div>
           <!-- Savings Section   -->
           <div
-            class="d-flex flex-lg-row flex-column justify-content-between align-items-center mx-auto"
+            class="d-flex flex-xl-row flex-lg-column flex-column justify-content-around align-items-center mx-auto"
           >
             <label class="calc-label" for="">Save</label>
-            <div>
-              <input
-                id="save-percent-amount"
-                class="calc-input"
-                type="number"
-                disabled
-              />
-              <label class="calc-label" for=""> %</label>
-            </div>
+            <!-- <div class="justify-content-between"> -->
+            <input
+              id="save-percent-amount"
+              class="calc-input"
+              type="number"
+              placeholder="Saving Amount"
+              disabled
+            />
+            <label class="calc-label" for="">%</label>
+            <!-- </div> -->
             <button id="save-button" class="calc-buttons">Save</button>
           </div>
 
